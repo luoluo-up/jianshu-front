@@ -4,9 +4,11 @@
  * @Author: CoderHD
  * @Date: 2021-10-26 14:30:03
  * @LastEditors: CoderHD
- * @LastEditTime: 2021-10-26 21:42:07
+ * @LastEditTime: 2021-10-28 22:22:11
  */
 import axios from "axios";
+
+// let whitelist = ['users/login', 'users/reg'] // 拦截器白名单，登录时不添加 token
 
 let instance = axios.create({
   // 基本的路由配置和时常
@@ -16,7 +18,10 @@ let instance = axios.create({
 // 第一个回调：请求拦截的方法；第二个回调：请求失败的方法
 instance.interceptors.request.use(
   (config) => {
-    // 请求拦截的相关内容
+    //请求拦截要处理的内容
+    if (window.localStorage.token) {
+      config.headers.authorization = "Bearer " + localStorage.token;
+    }
     return config;
   },
   (err) => {

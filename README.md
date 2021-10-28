@@ -4,7 +4,7 @@
  * @Author: CoderHD
  * @Date: 2021-10-26 13:35:50
  * @LastEditors: CoderHD
- * @LastEditTime: 2021-10-27 01:11:20
+ * @LastEditTime: 2021-10-27 02:08:45
 -->
 # jianshu-client
 
@@ -40,3 +40,4 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 `vue creat jianshu-client`
 
 
+git branch -M main:改变当下分支名称

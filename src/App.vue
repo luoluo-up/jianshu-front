@@ -4,7 +4,7 @@
  * @Author: CoderHD
  * @Date: 2021-10-26 13:36:29
  * @LastEditors: CoderHD
- * @LastEditTime: 2021-10-26 22:37:32
+ * @LastEditTime: 2021-10-28 00:16:35
 -->
 <template>
   <router-view></router-view>
@@ -18,13 +18,13 @@ export default {
     // 	}).catch(err=>{
     // 		console.error('请求异常',err)
     // 	})
-    this.$http({
-      path: "https://cnodejs.org/api/v1/topics",
-      method: "get",
-      params: {},
-    }).then((res) => {
-      console.log(res.data);
-    });
+    // this.$http({
+    //   path: "users/login",
+    //   method: "post",
+    //   params: {},
+    // }).then((res) => {
+    //   console.log(res.data);
+    // });
   },
 };
 </script>

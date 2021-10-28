@@ -4,7 +4,7 @@
  * @Author: CoderHD
  * @Date: 2021-10-26 13:36:29
  * @LastEditors: CoderHD
- * @LastEditTime: 2021-10-27 00:17:05
+ * @LastEditTime: 2021-10-28 16:17:36
  */
 import Vue from "vue";
 import VueRouter from "vue-router";
@@ -12,15 +12,37 @@ import VueRouter from "vue-router";
 Vue.use(VueRouter);
 
 const routes = [
+  // {
+  // 	path: '/',
+  // 	name: 'Web',
+  // 	component: () => import('@/views/Web'),
+  // 	redirect: '/article',
+  // 	// children: [
+  // 	// 	{
+  // 	// 		path: '/article',
+  // 	// 		name: 'ArticleList',
+  // 	// 		component: () => import('@/views/Web/list.vue')
+  // 	// 	},
+  // 	// 	{
+  // 	// 		path: '/article/:id',
+  // 	// 		name: 'Article',
+  // 	// 		component: () => import('@/views/Web/article.vue')
+  // 	// 	}
+  // 	// ]
+  // },
   {
     path: "/",
-    name: "web",
-    component: () => import("@/views/Web"),
+    name: "Login",
+    component: () => import("@/views/Login"),
+    meta: {
+      title: "系统登录",
+    },
   },
   {
-    path: "/admin",
-    name: "Admin",
+    path: "/home",
+    name: "Home",
     component: () => import("@/views/Home"),
+    redirect: "/admin/users/personal",
     children: [
       {
         path: "/admin/users/personal",
@@ -48,7 +70,7 @@ const routes = [
       },
       {
         path: "/admin/article/add",
-        name: "AddArticle",
+        name: "ArticleAdd",
         component: () => import("@/views/Article/add.vue"),
         meta: {
           title: "发布文章",
@@ -56,31 +78,31 @@ const routes = [
       },
       {
         path: "/admin/article/update",
-        name: "UpdateArticle",
+        name: "ArticleUpdate",
         component: () => import("@/views/Article/update.vue"),
         meta: {
-          title: "更新文章",
-        },
-      },
-      {
-        path: "/admin/fans",
-        name: "AdminFans",
-        component: () => import("@/views/Fans"),
-        meta: {
-          title: "粉丝管理",
+          title: "编辑文章",
         },
       },
       {
         path: "/admin/comment",
-        name: "AdminComment",
+        name: "Comment",
         component: () => import("@/views/Comment"),
         meta: {
           title: "评论管理",
         },
       },
       {
+        path: "/admin/fans",
+        name: "Fans",
+        component: () => import("@/views/Fans"),
+        meta: {
+          title: "粉丝管理",
+        },
+      },
+      {
         path: "/admin/star",
-        name: "AdminStar",
+        name: "Star",
         component: () => import("@/views/Star"),
         meta: {
           title: "点赞管理",
@@ -88,11 +110,14 @@ const routes = [
       },
     ],
   },
-  {
-    path: "/login",
-    name: "Login",
-    component: () => import("@/views/Login"),
-  },
+  // {
+  // 	path: '/login',
+  // 	name: 'Login',
+  // 	component: () => import('@/views/Login'),
+  // 	meta: {
+  // 		title: '系统登录'
+  // 	}
+  // }
 ];
 
 const router = new VueRouter({

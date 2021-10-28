@@ -4,17 +4,19 @@
  * @Author: CoderHD
  * @Date: 2021-10-26 21:29:58
  * @LastEditors: CoderHD
- * @LastEditTime: 2021-10-27 01:52:25
+ * @LastEditTime: 2021-10-28 17:06:39
 -->
 <template>
   <el-container>
     <el-header>
       <div class="sys-title">后台管理系统</div>
       <div class="header-right">
-        <span>网站首页</span>
-        <span>头像</span>
-        <span>admin</span>
-        <span>退出</span>
+        <el-link :underline="false" style="margin-right: 20px"
+          >网站首页</el-link
+        >
+        <el-avatar size="small" :src="$store.state.user.avatar"></el-avatar>
+        <el-link :underline="false">{{ username }}</el-link>
+        <el-link :underline="false">退出</el-link>
       </div>
     </el-header>
     <el-container>
@@ -59,7 +61,14 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      username: window.localStorage.getItem("username"),
+    };
+  },
+  mounted() {},
+};
 </script>
 
 <style>
