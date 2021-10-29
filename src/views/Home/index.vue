@@ -4,7 +4,7 @@
  * @Author: CoderHD
  * @Date: 2021-10-26 21:29:58
  * @LastEditors: CoderHD
- * @LastEditTime: 2021-10-28 17:06:39
+ * @LastEditTime: 2021-10-30 00:20:44
 -->
 <template>
   <el-container>
@@ -14,7 +14,7 @@
         <el-link :underline="false" style="margin-right: 20px"
           >网站首页</el-link
         >
-        <el-avatar size="small" :src="$store.state.user.avatar"></el-avatar>
+        <el-avatar size="small" :src="avatar_url"></el-avatar>
         <el-link :underline="false">{{ username }}</el-link>
         <el-link :underline="false">退出</el-link>
       </div>
@@ -65,9 +65,13 @@ export default {
   data() {
     return {
       username: window.localStorage.getItem("username"),
+      avatar_url: window.localStorage.getItem("avatar"),
     };
   },
-  mounted() {},
+  beforeDestroy() {
+    console.log("beforeDestory 执行了");
+    this.avatar_url = window.localStorage.getItem("avatar");
+  },
 };
 </script>
 

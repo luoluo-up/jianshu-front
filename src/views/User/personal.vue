@@ -4,7 +4,7 @@
  * @Author: CoderHD
  * @Date: 2021-10-26 21:32:54
  * @LastEditors: CoderHD
- * @LastEditTime: 2021-10-29 00:09:00
+ * @LastEditTime: 2021-10-30 00:19:36
 -->
 <template>
   <div>
@@ -13,7 +13,7 @@
       <el-form-item label="头像">
         <div class="avatar-div">
           <!-- 上传组件 -->
-          <img v-show="form.avatar" :src="form.avatar" class="small-img" />
+          <img :model="form.avatar" :src="form.avatar" class="small-img" />
           <el-upload
             v-if="!form.avatar"
             class="upload-demo"
@@ -25,9 +25,6 @@
             multiple
           >
             <el-button size="small" type="primary">点击上传</el-button>
-            <div slot="tip" class="el-upload__tip">
-              只能上传jpg/png文件，且不超过500kb
-            </div>
           </el-upload>
         </div>
       </el-form-item>
@@ -86,10 +83,12 @@ export default {
   methods: {
     onSuccess(res) {
       //给对象添加方法(在vue3中才会重新渲染)
-      this.form.avatar = res.path;
+      console.log(res.data);
+      this.form.avatar = res.data;
     },
     saveForm() {
       //给对象添加属性（没有下列这句，接口查不到）
+      window.localStorage.setItem("avatar", this.form.avatar);
       this.form._id = window.localStorage.getItem("_id");
       this.$http({
         path: "users/update/personal",
@@ -114,6 +113,7 @@ export default {
   height: 120px;
   margin-right: 20px;
   border-radius: 50%;
+  z-index: 99;
 }
 .avatar-div {
   display: flex;

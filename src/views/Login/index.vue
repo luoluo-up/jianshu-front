@@ -1,6 +1,6 @@
 <template>
   <div class="login_container">
-    <vue-particles
+    <!-- <vue-particles
       class="login-bg"
       color="#39AFFD"
       :particleOpacity="0.7"
@@ -18,7 +18,7 @@
       :clickEffect="true"
       clickMode="push"
     >
-    </vue-particles>
+    </vue-particles> -->
     <div class="login_box">
       <!-- 头像区域 -->
       <!-- <div class="avatar_box"> -->
