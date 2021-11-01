@@ -4,7 +4,7 @@
  * @Author: CoderHD
  * @Date: 2021-10-26 21:34:46
  * @LastEditors: CoderHD
- * @LastEditTime: 2021-10-30 00:32:57
+ * @LastEditTime: 2021-11-01 16:43:03
 -->
 <template>
   <div>
@@ -38,15 +38,52 @@ export default {
       form: {
         title: "",
         stemfrom: "",
-        author: this.$store.state.user.username,
+        author: window.localStorage.getItem("username"),
       },
       editor: null,
     };
   },
   mounted() {
-    //创建wangEditor示例
+    //创建wangEditor实例
     this.editor = new Editor("#editor");
+    //配置上传图片的接口地址
+    this.editor.config.uploadImgServer = `http://localhost:3000/upload/editor/img`;
+    this.editor.config.uploadFileName = "editorFile";
+    this.editor.config.uploadImgHeaders = {
+      authorization: "Bearer " + localStorage.token,
+    };
+    //设置富文本编辑器高度
+    // this.editor.config.hight = 600
+    //设置提示文字
+    this.editor.config.placeholder = "编辑文章内容";
     this.editor.create();
+  },
+  methods: {
+    submit() {
+      //获取富文本编辑器的内容
+      let content = this.editor.txt.html();
+      console.log(content);
+      let date = new Date();
+      this.$http({
+        path: "/article/add",
+        method: "post",
+        params: {
+          id: Date.now(),
+          title: this.form.title,
+          createTime: `${date.getFullYear()}-${
+            date.getMonth() + 1
+          }-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`,
+          stemfrom: this.form.stemfrom,
+          content,
+          author: this.form.author,
+        },
+      }).then((res) => {
+        this.$message({
+          message: res.data.msg,
+          type: res.data.code === 200 ? "success" : "error",
+        });
+      });
+    },
   },
 };
 </script>
