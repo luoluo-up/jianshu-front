@@ -41,9 +41,9 @@
           ></el-input>
         </el-form-item>
         <!-- 密码 -->
-        <el-form-item prop="password">
+        <el-form-item prop="pwd">
           <el-input
-            v-model="loginForm.password"
+            v-model="loginForm.pwd"
             prefix-icon="iconfont icon-3702mima"
             type="password"
           ></el-input>
@@ -64,8 +64,8 @@ export default {
     return {
       // 这是登录表单的数据绑定对象
       loginForm: {
-        username: "admin",
-        password: "123456",
+        username: "osh",
+        pwd: "654321abc",
       },
       // 这是表单的验证规则对象
       loginFormRules: {
@@ -80,7 +80,7 @@ export default {
           },
         ],
         // 验证密码是否合法
-        password: [
+        pwd: [
           { required: true, message: "请输入登录密码", trigger: "blur" },
           {
             min: 6,
@@ -110,19 +110,22 @@ export default {
           method: "post",
           params: this.loginForm,
         });
-        console.log(res.data);
-        if (res.status !== 200) return this.$message.error("登录失败！");
+        console.log(res);
+        if (res.code !== 200) return this.$message.error("登录失败！");
         this.$message.success("登录成功");
         // 1. 将登录成功之后的 token，保存到客户端的 sessionStorage 中
         //   1.1 项目中出了登录之外的其他API接口，必须在登录之后才能访问
         //   1.2 token 只应在当前网站打开期间生效，所以将 token name保存在 sessionStorage 中
-        localStorage.token = res.data.token;
+        localStorage.token = res.token;
         //本地存储username和token
         window.localStorage.setItem("username", this.loginForm.username);
-        window.localStorage.setItem("token", res.data.token);
+        window.localStorage.setItem("token", res.token);
         //会话存储_id(唯一标识)
-        window.localStorage.setItem("_id", res.data._id);
-        console.log(res.data.token);
+        window.localStorage.setItem("_id", res._id);
+        // 存储头像地址
+        window.localStorage.setItem("avatar", res.avatar);
+        // 2. 通过编程式导航跳转到后台主页，路由地址是 /home
+        console.log(res.token);
         // 2. 通过编程式导航跳转到后台主页，路由地址是 /home
         this.$router.push("/home");
       });
@@ -139,11 +142,13 @@ export default {
   position: relative;
   background-color: #3e3e3e;
 }
+
 .login-bg {
   width: 100%;
   height: 100%;
   background: #3e3e3e;
 }
+
 .login_box {
   width: 400px;
   height: 270px;
@@ -156,6 +161,7 @@ export default {
   top: 50%;
   transform: translate(-50%, -50%);
 }
+
 .login_box .title {
   display: flex;
   justify-content: center;
@@ -166,6 +172,7 @@ export default {
   color: white;
   border-bottom: 1px solid #ffffff;
 }
+
 .login_box .avatar_box {
   height: 130px;
   width: 130px;
@@ -178,12 +185,14 @@ export default {
   transform: translate(-50%, -50%);
   background-color: #fff;
 }
+
 .login_box .avatar_box img {
   width: 100%;
   height: 100%;
   border-radius: 50%;
   background-color: #eee;
 }
+
 .login_form {
   position: absolute;
   bottom: 0;

@@ -1,11 +1,3 @@
-<!--
- * @Descripttion: 
- * @version: 
- * @Author: CoderHD
- * @Date: 2021-10-26 21:29:58
- * @LastEditors: CoderHD
- * @LastEditTime: 2021-10-30 00:20:44
--->
 <template>
   <el-container>
     <el-header>
@@ -14,7 +6,7 @@
         <el-link :underline="false" style="margin-right: 20px"
           >网站首页</el-link
         >
-        <el-avatar size="small" :src="avatar_url"></el-avatar>
+        <img :src="avatar_url" class="avatar" alt="" />
         <el-link :underline="false">{{ username }}</el-link>
         <el-link :underline="false">退出</el-link>
       </div>
@@ -76,9 +68,17 @@ export default {
 </script>
 
 <style>
+.avatar {
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 50%;
+  margin: 0 10px;
+}
+
 .el-container {
   height: 100%;
 }
+
 .el-header {
   background-color: #373d41;
   display: flex;
@@ -90,25 +90,31 @@ export default {
   padding: 0 15px;
   height: 80px !important;
 }
+
 .el-header img {
   width: 60px;
   height: 60px;
   border-radius: 100%;
   margin: 15px 0px 15px 15px;
 }
+
 .el-header div {
   display: flex;
   align-items: center;
 }
+
 .el-header div span {
   margin-left: 15px;
 }
+
 .el-aside {
   background-color: #333744;
 }
+
 .el-aside .el-menu {
   border-right: none;
 }
+
 .el-main {
   background-color: #eaedf1;
 }

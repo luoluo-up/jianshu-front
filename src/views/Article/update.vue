@@ -1,11 +1,3 @@
-<!--
- * @Descripttion: 
- * @version: 
- * @Author: CoderHD
- * @Date: 2021-10-26 21:34:46
- * @LastEditors: CoderHD
- * @LastEditTime: 2021-11-01 20:40:04
--->
 <template>
   <div>
     <el-form label-width="100px">
@@ -56,8 +48,8 @@ export default {
         id,
       },
     }).then((res) => {
-      console.log(res.data);
-      this.form = res.data.result;
+      console.log(res);
+      this.form = res.data;
       // this.form.content=res.data.result.content
       console.log("created come out");
     });
@@ -105,9 +97,10 @@ export default {
         },
       }).then((res) => {
         this.$message({
-          message: res.data.msg,
-          type: res.data.code === 200 ? "success" : "error",
+          message: res.msg,
+          type: res.code === 200 ? "success" : "error",
         });
+        this.$router.push("/admin/article");
       });
     },
   },

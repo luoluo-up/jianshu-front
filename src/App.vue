@@ -1,11 +1,3 @@
-<!--
- * @Descripttion: 
- * @version: 
- * @Author: CoderHD
- * @Date: 2021-10-26 13:36:29
- * @LastEditors: CoderHD
- * @LastEditTime: 2021-10-28 00:16:35
--->
 <template>
   <router-view></router-view>
 </template>

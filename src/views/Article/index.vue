@@ -1,11 +1,3 @@
-<!--
- * @Descripttion: 
- * @version: 
- * @Author: CoderHD
- * @Date: 2021-10-26 21:34:12
- * @LastEditors: CoderHD
- * @LastEditTime: 2021-11-01 17:15:58
--->
 <template>
   <div>
     <el-table :data="articles" style="width: 100%">
@@ -64,8 +56,8 @@ export default {
           author: window.localStorage.getItem("username"),
         },
       }).then((res) => {
-        // console.log(res)
-        this.articles = res.data.result;
+        console.log(res.data);
+        this.articles = res.data;
         this.page = res.data.page;
         this.pageSize = res.data.pageSize;
         this.count = res.data.count;
@@ -88,7 +80,7 @@ export default {
         type: "warning",
       }).then(() => {
         this.$http({
-          path: "/article/delete",
+          path: "/article/del",
           method: "post",
           params: {
             id: row.id,
@@ -98,11 +90,11 @@ export default {
             console.log(res);
             this.$message({
               //提示栏中信息提示：
-              message: res.data.msg,
+              message: res.msg,
               //
-              type: res.data.code === 200 ? "success" : "error",
+              type: res.code === 200 ? "success" : "error",
             });
-            if (res.data.code === 200) {
+            if (res.code === 200) {
               this.getData();
             }
           })

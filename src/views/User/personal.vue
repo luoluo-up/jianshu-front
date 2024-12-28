@@ -1,11 +1,3 @@
-<!--
- * @Descripttion: 
- * @version: 
- * @Author: CoderHD
- * @Date: 2021-10-26 21:32:54
- * @LastEditors: CoderHD
- * @LastEditTime: 2021-10-30 00:19:36
--->
 <template>
   <div>
     <!-- form表单 -->
@@ -13,12 +5,21 @@
       <el-form-item label="头像">
         <div class="avatar-div">
           <!-- 上传组件 -->
-          <img :model="form.avatar" :src="form.avatar" class="small-img" />
+          <img
+            v-if="form.avatar"
+            :model="form.avatar"
+            :src="form.avatar"
+            class="small-img"
+          />
+          <!-- <el-upload v-if="!form.avatar" class="upload-demo" action="http://localhost:3000/upload/img" name="file"
+            :headers="uploadHeader" :on-success="onSuccess" :show-file-list="false" multiple>
+            <el-button size="small" type="primary">点击上传</el-button>
+          </el-upload> -->
           <el-upload
             v-if="!form.avatar"
             class="upload-demo"
-            action="http://localhost:3000/upload/img"
-            name="myfile"
+            action="http://8.134.92.247:3000/upload/img"
+            name="file"
             :headers="uploadHeader"
             :on-success="onSuccess"
             :show-file-list="false"
@@ -83,8 +84,8 @@ export default {
   methods: {
     onSuccess(res) {
       //给对象添加方法(在vue3中才会重新渲染)
-      console.log(res.data);
-      this.form.avatar = res.data;
+      this.$set(this.form, "avatar", res.data.url);
+      // this.form.avatar = res.data.url;
     },
     saveForm() {
       //给对象添加属性（没有下列这句，接口查不到）
@@ -98,8 +99,8 @@ export default {
         this.$message({
           duration: 2000,
           offset: 300,
-          message: res.data.msg,
-          type: res.data.code === 200 ? "success" : "error",
+          message: res.msg,
+          type: res.code === 200 ? "success" : "error",
         });
       });
     },
@@ -115,11 +116,13 @@ export default {
   border-radius: 50%;
   z-index: 99;
 }
+
 .avatar-div {
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 .el-form-item {
   text-align: center;
   margin-left: 40px;

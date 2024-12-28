@@ -1,11 +1,3 @@
-<!--
- * @Descripttion: 
- * @version: 
- * @Author: CoderHD
- * @Date: 2021-10-26 21:35:58
- * @LastEditors: CoderHD
- * @LastEditTime: 2021-11-01 23:57:15
--->
 <template>
   <div>
     <el-table :data="comments">
@@ -63,10 +55,10 @@ export default {
         },
       }).then((res) => {
         console.log(res);
-        this.comments = res.data.result;
-        this.page = res.data.page;
-        this.pageSize = res.data.pageSize;
-        this.count = res.data.count;
+        this.comments = res.data;
+        this.page = res.page;
+        this.pageSize = res.pageSize;
+        this.count = res.count;
       });
     },
     changePage(page) {

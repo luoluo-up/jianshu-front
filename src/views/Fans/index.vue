@@ -1,11 +1,3 @@
-<!--
- * @Descripttion: 
- * @version: 
- * @Author: CoderHD
- * @Date: 2021-10-26 21:36:41
- * @LastEditors: CoderHD
- * @LastEditTime: 2021-11-02 01:00:08
--->
 <template>
   <div>
     <el-table :data="fans">
@@ -61,10 +53,10 @@ export default {
           author: localStorage.getItem("username"),
         },
       }).then((res) => {
-        this.fans = res.data.result;
-        this.page = res.data.page;
-        this.pageSize = res.data.pageSize;
-        this.count = res.data.count;
+        this.fans = res.data;
+        this.page = res.page;
+        this.pageSize = res.pageSize;
+        this.count = res.count;
       });
     },
     changePage(page) {
