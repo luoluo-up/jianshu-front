@@ -13,7 +13,7 @@ import axios from "axios";
 let instance = axios.create({
   // 基本的路由配置和时常
   // baseURL: "http://127.0.0.1:3000",
-  baseURL: "http://8.134.92.247:3000",
+  baseURL: "https://8.134.92.247:3000",
   timeout: 5000,
 });
 // 第一个回调：请求拦截的方法；第二个回调：请求失败的方法
